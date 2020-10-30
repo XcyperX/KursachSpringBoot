@@ -14,11 +14,13 @@
                 <option value="${stock.stockId}">${stock.stockName}</option>
             </#list>
         </select>
-        <input type="button" onclick="submitNewUser()">Save</input>
+        <input class="btn btn-primary" type="button" onclick="submitNewUser()" value="Добавить сотрудника">
+<#--        <input type="button" onclick="submitNewUser()">Save</input>-->
     </form>
     <form id="addRole" name="addRole" method="post">
         <input id="name" type="text" name="name">
-        <input type="button" onclick="submitNewRole()">Save</input>
+        <input class="btn btn-primary" type="button" onclick="submitNewRole()" value="Добавить склад">
+<#--        <input type="button" onclick="submitNewRole()">Save</input>-->
     </form>
 </#macro>
 <#macro logout>

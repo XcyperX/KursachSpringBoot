@@ -6,8 +6,8 @@
     <form id="addStock" name="addStock">
         <input id="stock_id" type="hidden" name="stock_id">
         <input id="name" type="text" name="stockName" placeholder="Введите название склада" />
-        <input type="button" onclick="submitNewStock()">Добавить</input>
-<#--        <input class="btn btn-primary" type="submit" value="Добавить" onclick="submitNewStock()">-->
+<#--        <input type="button" onclick="submitNewStock()">Добавить</input>-->
+        <input class="btn btn-primary" type="button" value="Добавить" onclick="submitNewStock()">
     </form>
 </div>
 
