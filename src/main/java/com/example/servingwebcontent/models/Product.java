@@ -13,7 +13,7 @@ public class Product {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String nameProduct;
 
     @ManyToOne
     @JoinColumn(name = "stock_id", referencedColumnName = "id", nullable = false)
@@ -24,5 +24,5 @@ public class Product {
     @Column(nullable = false)
     private Integer amountOnSale;
     @Column(nullable = false)
-    private Float price;
+    private Float priceProduct;
 }

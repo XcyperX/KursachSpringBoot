@@ -1,6 +1,7 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.models.Role;
+import com.example.servingwebcontent.service.ProductService;
 import com.example.servingwebcontent.service.RoleService;
 import com.example.servingwebcontent.service.StockService;
 import com.example.servingwebcontent.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class UiController {
@@ -17,6 +19,8 @@ public class UiController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -25,17 +29,59 @@ public class UiController {
         return "registration";
     }
 
-    @GetMapping("/stock")
-    public String stock(Model model) {
-        model.addAttribute("stocks", stockService.findAll());
-        return "stock";
-    }
-
     @GetMapping("/users")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("stocks", stockService.findAll());
         return "userList";
+    }
+
+    @GetMapping("/users/{id}")
+    public String userEditForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", userService.getById(id));
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("stocks", stockService.findAll());
+        return "userEdit";
+    }
+
+    @GetMapping("/products")
+    public String getProducts(Model model) {
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("stocks", stockService.findAll());
+        model.addAttribute("products", productService.findAll());
+        return "stock";
+    }
+
+    @GetMapping("/products/items")
+    public String getProduct(Model model) {
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("stocks", stockService.findAll());
+        model.addAttribute("products", productService.findAll());
+        return "addProduct";
+    }
+
+    @GetMapping("/products/items/{id}")
+    public String getProduct(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("stocks", stockService.findAll());
+        model.addAttribute("products", productService.getById(id));
+        return "productEdit";
+    }
+
+    @GetMapping("/products/all")
+    public String getAllProduct(Model model) {
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("stocks", stockService.findAll());
+        model.addAttribute("products", productService.findAll());
+        return "allStock";
+    }
+
+    @GetMapping("/products/all/stock/{id}")
+    public String getProductOnStock(@PathVariable("id") Long id,Model model) {
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("stocks", stockService.findAll());
+        model.addAttribute("products", productService.findByStock(id));
+        return "allStock";
     }
 }

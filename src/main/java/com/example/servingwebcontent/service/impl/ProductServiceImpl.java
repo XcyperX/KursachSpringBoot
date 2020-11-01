@@ -8,6 +8,8 @@ import com.example.servingwebcontent.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,8 +21,12 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepo productRepo;
 
     @Override
-    public ProductDto getById(Long aLong) {
-        return null;
+    public ProductDto getById(Long id) {
+        Optional<Product> productOptional = productRepo.findById(id);
+        if (productOptional.isEmpty()) {
+            throw new RuntimeException("Ошибка, нет такого товара!");
+        }
+        return allMapper.entityToProductDto(productOptional.get());
     }
 
     @Override
@@ -40,7 +46,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(Long aLong) {
+    public void delete(Long id) {
+        Optional<Product> productOptional = productRepo.findById(id);
+        if (productOptional.isEmpty()) {
+            throw new RuntimeException("Ошибка, нет такого товара!");
+        }
+        productRepo.deleteById(id);
+    }
 
+    @Override
+    public List<ProductDto> findAll() {
+        List<ProductDto> productDtoList = new ArrayList<>();
+        productRepo.findAll().forEach(product -> productDtoList.add(allMapper.entityToProductDto(product)));
+        return productDtoList;
+    }
+
+    @Override
+    public List<ProductDto> findByStock(Long id) {
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (Product product : productRepo.findAll()) {
+            if (allMapper.entityToProductDto(product).getStockId().equals(id)) {
+                productDtoList.add(allMapper.entityToProductDto(product));
+            }
+        }
+        return productDtoList;
     }
 }

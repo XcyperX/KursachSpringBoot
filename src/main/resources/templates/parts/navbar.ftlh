@@ -13,10 +13,10 @@
                 <a class="nav-link" href="/">Поставщики</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/stock">Склады</a>
+                <a class="nav-link" href="/products/all">Склады</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/main">Склад</a>
+                <a class="nav-link" href="/products">Склад</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/users">Сотрудники</a>

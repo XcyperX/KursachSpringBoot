@@ -1,10 +1,15 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <div>
-        <a href="/products/items" class="btn btn-primary mb-4" type="button">Добавить продукт</a>
-    </div>
+    <label for="inputStock">Название склада</label>
+    <select id="stock_id" class="form-control" onchange="window.location.href=this.options[this.selectedIndex].value">
 
+        <option value="http://localhost:8080/products/all">Все</option>
+        <#list stocks as stock>
+<#--            <#if stock.stockId == products-->
+            <option value="http://localhost:8080/products/all/stock/${stock.stockId}">${stock.stockName}</option>
+        </#list>
+    </select>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -30,7 +35,7 @@
                 <td>${product.amountOnStock}</td>
                 <td>${product.amountOnSale}</td>
                 <td>${product.priceProduct}</td>
-                <td><a href="/products/items/${product.productId}">Редактировать</a></td>
+                <td><a href="/products/${product.productId}">Редактировать</a></td>
             </tr>
         </#list>
     </table>

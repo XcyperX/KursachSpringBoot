@@ -1,8 +1,10 @@
 package com.example.servingwebcontent.controller;
 
+import com.example.servingwebcontent.dto.ProductDto;
 import com.example.servingwebcontent.dto.RoleDto;
 import com.example.servingwebcontent.dto.StockDto;
 import com.example.servingwebcontent.dto.UserDto;
+import com.example.servingwebcontent.service.ProductService;
 import com.example.servingwebcontent.service.RoleService;
 import com.example.servingwebcontent.service.StockService;
 import com.example.servingwebcontent.service.UserService;
@@ -20,6 +22,8 @@ public class RestApiController {
     private StockService stockService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private ProductService productService;
 
     @PostMapping("/users")
     public UserDto userSave(@RequestBody @Valid UserDto userDto) {
@@ -30,6 +34,11 @@ public class RestApiController {
     public UserDto userSave(@PathVariable("id") Long id, @RequestBody @Valid UserDto userDto) {
         userDto.setUserId(id);
         return userService.update(userDto);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+        userService.delete(id);
     }
 
     @PostMapping("/stocks")
@@ -46,5 +55,21 @@ public class RestApiController {
     @PostMapping("/roles")
     public RoleDto addStock(@RequestBody @Valid RoleDto roleDto) {
         return roleService.save(roleDto);
+    }
+
+    @PostMapping("/products")
+    public ProductDto addProduct(@RequestBody @Valid ProductDto productDto) {
+        return productService.save(productDto);
+    }
+
+    @PutMapping("/products/items/{id}")
+    public ProductDto userSave(@PathVariable("id") Long id, @RequestBody @Valid ProductDto productDto) {
+        productDto.setProductId(id);
+        return productService.update(productDto);
+    }
+
+    @DeleteMapping("/products/items/{id}")
+    public void deleteProduct(@PathVariable("id") Long id) {
+        productService.delete(id);
     }
 }

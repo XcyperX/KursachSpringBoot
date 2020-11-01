@@ -54,24 +54,24 @@ public class AllMapper {
     public Product productDtoToEntity(ProductDto productDto) {
         Product product = new Product();
         product.setId(productDto.getProductId());
-        product.setName(productDto.getNameProduct());
+        product.setNameProduct(productDto.getNameProduct());
         product.setAmountOnStock(productDto.getAmountOnStock());
         product.setAmountOnSale(productDto.getAmountOnSale());
         Stock stock = new Stock();
         stock.setId(productDto.getStockId());
         product.setStock(stock);
-        product.setPrice(productDto.getPriceProduct());
+        product.setPriceProduct(productDto.getPriceProduct());
         return product;
     }
 
     public ProductDto entityToProductDto(Product product) {
         ProductDto productDto = new ProductDto();
         productDto.setProductId(product.getId());
-        productDto.setNameProduct(product.getName());
+        productDto.setNameProduct(product.getNameProduct());
         productDto.setAmountOnStock(product.getAmountOnStock());
         productDto.setAmountOnSale(product.getAmountOnSale());
         productDto.setStockId(product.getStock().getId());
-        productDto.setPriceProduct(product.getPrice());
+        productDto.setPriceProduct(product.getPriceProduct());
         return productDto;
     }
 

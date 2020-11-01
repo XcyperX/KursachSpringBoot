@@ -36,13 +36,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(Long aLong) {
-        return null;
+    public UserDto getById(Long id) {
+        Optional<User> user = userRepo.findById(id);
+        if (user.isEmpty()) {
+            throw new RuntimeException("Ошибка, нет такого пользователя!");
+        }
+        return allMapper.entityToUserDto(user.get());
     }
 
     @Override
-    public void delete(Long aLong) {
-
+    public void delete(Long id) {
+        Optional<User> user = userRepo.findById(id);
+        if (user.isEmpty()) {
+            throw new RuntimeException("Ошибка, нет такого пользователя!");
+        }
+        userRepo.deleteById(id);
     }
 
     @Override

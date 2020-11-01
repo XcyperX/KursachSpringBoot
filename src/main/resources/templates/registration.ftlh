@@ -2,8 +2,6 @@
 <#import "parts/login.ftlh" as l>
 
 <@c.page>
-Add new user
-${message!""}
 <@l.login stocks=stocks/>
 
 
