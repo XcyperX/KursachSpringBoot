@@ -12,6 +12,7 @@
             <th scope="col">Склад</th>
             <th scope="col">Количество на складе</th>
             <th scope="col">Количество проданных</th>
+            <th scope="col">Заказано у поставщика</th>
             <th scope="col">Цена</th>
             <th></th>
         </tr>
@@ -29,6 +30,7 @@
                 </td>
                 <td>${product.amountOnStock}</td>
                 <td>${product.amountOnSale}</td>
+                <td>${product.orderedSupplier!"Заказов нет"}</td>
                 <td>${product.priceProduct}</td>
                 <td><a href="/products/items/${product.productId}">Редактировать</a></td>
             </tr>

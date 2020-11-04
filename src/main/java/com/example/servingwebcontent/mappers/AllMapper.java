@@ -10,6 +10,9 @@ import com.example.servingwebcontent.models.Stock;
 import com.example.servingwebcontent.models.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class AllMapper {
     public User userDtoToEntity(UserDto userDto) {
@@ -61,6 +64,7 @@ public class AllMapper {
         stock.setId(productDto.getStockId());
         product.setStock(stock);
         product.setPriceProduct(productDto.getPriceProduct());
+        product.setOrderedSupplier(productDto.getOrderedSupplier());
         return product;
     }
 
@@ -72,7 +76,24 @@ public class AllMapper {
         productDto.setAmountOnSale(product.getAmountOnSale());
         productDto.setStockId(product.getStock().getId());
         productDto.setPriceProduct(product.getPriceProduct());
+        productDto.setOrderedSupplier(product.getOrderedSupplier());
         return productDto;
+    }
+
+    public List<ProductDto> entityToProductDto(List<Product> products) {
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (Product product : products) {
+            ProductDto productDto = new ProductDto();
+            productDto.setProductId(product.getId());
+            productDto.setNameProduct(product.getNameProduct());
+            productDto.setAmountOnStock(product.getAmountOnStock());
+            productDto.setAmountOnSale(product.getAmountOnSale());
+            productDto.setStockId(product.getStock().getId());
+            productDto.setPriceProduct(product.getPriceProduct());
+            productDto.setOrderedSupplier(product.getOrderedSupplier());
+            productDtoList.add(productDto);
+        }
+        return productDtoList;
     }
 
     public Role roleDtoToEntity(RoleDto roleDto) {

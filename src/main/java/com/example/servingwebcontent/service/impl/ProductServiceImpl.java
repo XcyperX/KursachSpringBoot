@@ -63,12 +63,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> findByStock(Long id) {
-        List<ProductDto> productDtoList = new ArrayList<>();
-        for (Product product : productRepo.findAll()) {
-            if (allMapper.entityToProductDto(product).getStockId().equals(id)) {
-                productDtoList.add(allMapper.entityToProductDto(product));
-            }
+        if (id == 0 || id == null) {
+            return allMapper.entityToProductDto(productRepo.findAll());
         }
-        return productDtoList;
+        return allMapper.entityToProductDto(productRepo.findAllByStockId(id));
+    }
+
+    @Override
+    public ProductDto setSupplierById(Long id, Integer amount) {
+        Optional<Product> productOptional = productRepo.findById(id);
+        if (productOptional.isEmpty()) {
+            throw new RuntimeException("Ошибка, нет такого товара!");
+        }
+        productOptional.get().setOrderedSupplier(amount);
+        return allMapper.entityToProductDto(productRepo.save(productOptional.get()));
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UiController {
@@ -69,19 +70,35 @@ public class UiController {
         return "productEdit";
     }
 
-    @GetMapping("/products/all")
-    public String getAllProduct(Model model) {
+//    @GetMapping("/products/all")
+//    public String getAllProduct(Model model) {
+//        model.addAttribute("users", userService.findAll());
+//        model.addAttribute("stocks", stockService.findAll());
+//        model.addAttribute("products", productService.findAll());
+//        return "allStock";
+//    }
+//
+//    @GetMapping("/products/all/stock/{id}")
+//    public String getProductOnStock(@PathVariable("id") Long id,Model model) {
+//        model.addAttribute("users", userService.findAll());
+//        model.addAttribute("stocks", stockService.findAll());
+//        model.addAttribute("products", productService.findByStock(id));
+//        return "allStock";
+//    }
+
+    @GetMapping("/products/stocks")
+    public String getAllProduct(Model model, @RequestParam Long stockId) {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("stocks", stockService.findAll());
-        model.addAttribute("products", productService.findAll());
+        model.addAttribute("products", productService.findByStock(stockId));
         return "allStock";
     }
 
-    @GetMapping("/products/all/stock/{id}")
-    public String getProductOnStock(@PathVariable("id") Long id,Model model) {
+    @GetMapping("/supplier")
+    public String getSupplier(Model model) {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("stocks", stockService.findAll());
-        model.addAttribute("products", productService.findByStock(id));
-        return "allStock";
+        model.addAttribute("products", productService.findAll());
+        return "supplier";
     }
 }

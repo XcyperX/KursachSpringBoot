@@ -4,5 +4,4 @@
 <@c.page>
 <@l.login stocks=stocks/>
 
-
 </@c.page>

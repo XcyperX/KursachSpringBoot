@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -71,5 +72,10 @@ public class RestApiController {
     @DeleteMapping("/products/items/{id}")
     public void deleteProduct(@PathVariable("id") Long id) {
         productService.delete(id);
+    }
+
+    @PutMapping("supplier/items/{id}")
+    public ProductDto setSupplier(@PathVariable("id") Long id, @RequestBody Map<String, Integer> amount) {
+        return productService.setSupplierById(id, amount.get("amount"));
     }
 }

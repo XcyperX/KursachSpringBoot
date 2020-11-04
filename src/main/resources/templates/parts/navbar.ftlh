@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Поставщики</a>
+                <a class="nav-link" href="/supplier">Поставщики</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/products/all">Склады</a>
+                <a class="nav-link" href="/products/stocks?stockId=0">Склады</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/products">Склад</a>

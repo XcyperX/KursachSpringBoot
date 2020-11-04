@@ -25,4 +25,6 @@ public class Product {
     private Integer amountOnSale;
     @Column(nullable = false)
     private Float priceProduct;
+    @Column(nullable = true)
+    private Integer orderedSupplier;
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductService extends CRUDService<ProductDto, Long> {
     List<ProductDto> findAll();
     List<ProductDto> findByStock(Long id);
+    ProductDto setSupplierById(Long id, Integer amount);
 }

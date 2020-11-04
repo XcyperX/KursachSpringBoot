@@ -202,6 +202,23 @@ updatesProduct = (product) => {
     });
 }
 
+updateSupplier = (productId) => {
+    console.log(productId);
+    let supplier = document.getElementById("ordered_supplier_" + productId);
+    const amountSupplier = {
+        amount: supplier.value
+    }
+    console.log(user);
+    sendRequest('PUT', '/api/supplier/items/' + productId, amountSupplier).then(response => {
+        if (response.ok) {
+            console.log(response);
+            document.location.href = "http://localhost:8080/products";
+        } else {
+            console.log(response);
+        }
+    });
+}
+
 deleteUser = (userId) => {
     console.log(user);
     sendRequest('DELETE', '/api/users/' + userId).then(response => {

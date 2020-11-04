@@ -20,4 +20,6 @@ public class ProductDto {
     private Integer amountOnSale;
     @JsonProperty("price_product")
     private Float priceProduct;
+    @JsonProperty("ordered_supplier")
+    private Integer orderedSupplier;
 }
