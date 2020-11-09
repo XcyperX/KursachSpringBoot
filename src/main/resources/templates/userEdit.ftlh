@@ -13,7 +13,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Пароль</label>
-                <input id="password" name="password" type="text" class="form-control" placeholder="Введите пароль" value="${user.password}">
+                <input id="password" name="password" type="password" class="form-control" placeholder="Введите пароль" value="${user.password}">
             </div>
         </div>
         <div class="form-row">
@@ -23,8 +23,9 @@
                     <#list roles as role>
                         <#if role.roleId == user.roleId>
                             <option value="${role.roleId}" selected>${role.name}</option>
+                        <#else>
+                            <option value="${role.roleId}">${role.name}</option>
                         </#if>
-                        <option value="${role.roleId}">${role.name}</option>
                     </#list>
                 </select>
             </div>
@@ -34,8 +35,9 @@
                     <#list stocks as stock>
                         <#if stock.stockId == user.stockId>
                             <option value="${stock.stockId}" selected>${stock.stockName}</option>
+                        <#else>
+                            <option value="${stock.stockId}">${stock.stockName}</option>
                         </#if>
-                        <option value="${stock.stockId}">${stock.stockName}</option>
                     </#list>
                 </select>
             </div>

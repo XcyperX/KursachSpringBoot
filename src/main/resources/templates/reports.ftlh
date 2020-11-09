@@ -1,20 +1,14 @@
-<#include "parts/security.ftlh">
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <#if isZAM_ADMIN>
-        <div>
-            <a href="/products/items" class="btn btn-primary mb-4" type="button">Добавить продукт</a>
-        </div>
-    </#if>
     <label for="inputStock">Название склада</label>
     <select id="stock_id" class="form-control mb-4" onchange="window.location.href=this.options[this.selectedIndex].value">
         <option value=""></option>
         <#list stocks as stock>
             <#if stock.stockName == "All">
-                <option value="/products/stocks?stockId=0">Все</option>
+                <option value="/reports/stocks?stockId=0">Все</option>
             <#else>
-                <option value="/products/stocks?stockId=${stock.stockId}">${stock.stockName}</option>
+                <option value="/reports/stocks?stockId=${stock.stockId}">${stock.stockName}</option>
             </#if>
         </#list>
     </select>
@@ -23,13 +17,10 @@
         <tr>
             <th scope="col">Название</th>
             <th scope="col">Склад</th>
-            <th scope="col">Количество на складе</th>
-            <th scope="col">Количество проданных</th>
-            <th scope="col">Заказано у поставщика</th>
             <th scope="col">Цена</th>
-            <#if isZAM_ADMIN>
-                <th></th>
-            </#if>
+            <th scope="col">Расходы</th>
+            <th scope="col">Прибыль</th>
+            <th scope="col">Чистая прибыль</th>
         </tr>
         </thead>
         <tbody>
@@ -43,14 +34,12 @@
                         </#if>
                     </#list>
                 </td>
-                <td>${product.amountOnStock}</td>
-                <td>${product.amountOnSale}</td>
-                <td>${product.orderedSupplier!"Заказов нет"}</td>
-                <td>${product.priceProduct}</td>
-                <#if isZAM_ADMIN>
-                    <td><a href="/products/items/${product.productId}">Редактировать</a></td>
-                </#if>
+                <td>${product.getPriceProduct()}</td>
+                <td>${product.getPriceProduct() * product.getAmountOnStock()!1 + product.getPriceProduct() * product.getOrderedSupplier()!1}</td>
+                <td>${product.getPriceProduct() * product.getAmountOnSale()!1}</td>
+                <td>${(product.getPriceProduct() * product.getAmountOnSale()!1) - (product.getPriceProduct() * product.getAmountOnStock()!1 + product.getPriceProduct() * product.getOrderedSupplier()!1)}</td>
             </tr>
         </#list>
     </table>
+    <a href="/api/pdf/products" class="btn btn-primary mb-4" type="button">Создать отчет</a>
 </@c.page>

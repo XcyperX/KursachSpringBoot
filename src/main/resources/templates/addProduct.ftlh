@@ -1,3 +1,4 @@
+<#include "parts/security.ftlh">
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
@@ -13,11 +14,18 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputStock">Название склада</label>
-                <select id="stock_id" class="form-control">
-                    <#list stocks as stock>
-                        <option value="${stock.stockId}">${stock.stockName}</option>
-                    </#list>
-                </select>
+                <#if isUser>
+                    <select id="stock_id" class="form-control">
+                        <option value="${user.getStock().getId()}">${stockName}</option>
+                    </select>
+                </#if>
+                <#if isZAM_ADMIN>
+                    <select id="stock_id" class="form-control">
+                        <#list stocks as stock>
+                            <option value="${stock.stockId}">${stock.stockName}</option>
+                        </#list>
+                    </select>
+                </#if>
             </div>
         </div>
         <div class="form-row">

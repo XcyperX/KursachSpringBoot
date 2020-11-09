@@ -236,7 +236,7 @@ deleteProduct = (productId) => {
     sendRequest('DELETE', '/api/products/items/' + productId).then(response => {
         if (response.ok) {
             console.log(response);
-            document.location.href = "http://localhost:8080/products";
+            document.location.href = "http://localhost:8080/products/stocks?stockId=0";
         } else {
             console.log(response);
         }

@@ -58,9 +58,9 @@
         </div>
     </div>
 </#macro>
+
 <#macro logout>
     <form action="/logout" method="post">
-        <button class="btn btn-primary" type="submit">Sign Out</button>
+        <input type="submit" class="btn btn-primary mr-3" value="Выйти"/>
     </form>
 </#macro>
-
